@@ -20,16 +20,23 @@ function App() {
 		setCart([item, ...cart]);
 	};
 
+	const rmItem = item => {
+		setCart(cart.filter(inCart => {
+			if(item !== inCart.id) {
+				return inCart
+			}
+		}))
+	};
+
 	return (
 		<div className="App">
-			<CartContext.Provider value={cart}>
+			<CartContext.Provider value={{cart, rmItem}}>
 			  <ProductContext.Provider value={{products, addItem}}>
 			  <Navigation />
   
 			  {/* Routes */}
 			  <Route exact path="/">
     		  		<Products />
-			  		
 			  </Route>
   
 			  <Route path="/cart">
